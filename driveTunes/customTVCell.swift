@@ -8,7 +8,7 @@
 
 import UIKit
 
-class customCell: UITableViewCell {
+class customTVCell: UITableViewCell {
     
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!

@@ -28,12 +28,6 @@ class nowPlayingVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        // I'd like to create a dictionary of the song title, the artist and the cover image.
-        // After doing that have this loop through and fill the dictionary up
-//        for song in songs{
-//           // songs.append()
-//        }
         
         if let coverImage = library[trackID]["coverImage"]{
             coverArtIV.image = UIImage(named: "\(coverImage).jpg")
@@ -41,11 +35,9 @@ class nowPlayingVC: UIViewController {
         songTitleLabel.text = library[trackID]["title"]
         artistTitleLabel.text = library[trackID]["artist"]
         
-        // this is the problem once I can get this line to work the way it should I'll be good.
-        // it won't find the right path thereby leaving audio player nil
-        let path = Bundle.main.path(forResource: "\(trackID)", ofType: "mp3")
+        let Path = Bundle.main.path(forResource: "\(trackID)", ofType: "mp3")
         
-        if let path = path{
+        if let path = Path{
             let myURL = NSURL(fileURLWithPath: path)
             do{
                 audioPlayer = try AVAudioPlayer(contentsOf: myURL as URL)
@@ -54,7 +46,9 @@ class nowPlayingVC: UIViewController {
                 Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(nowPlayingVC.updateProgressBar), userInfo: nil, repeats: true)
                 songProgressBar.setProgress(Float(audioPlayer.currentTime/audioPlayer.duration), animated: false)
                 
+                
             }catch let error as NSError {
+                print("help me")
                 print(error.localizedDescription)
                 
             }
